@@ -1,5 +1,8 @@
 pipeline {
   agent { label 'jenkinsagent' }
+  tools {
+    nodejs 'node-18.12.1'
+  }
   stages {
     stage('Install dependencies') {
       steps {
