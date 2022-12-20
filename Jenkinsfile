@@ -5,8 +5,17 @@ pipeline {
   }
   stages {
     stage('Install dependencies') {
-      steps {
-        sh "npm install"
+      parallel {
+      stage('NPM Packages') {
+        steps {
+          sh "npm install"
+        }
+      }
+      stage('Playwright') {
+          steps {
+            sh "npx playwright install"
+          }
+        }
       }
     }
     stage('Test & Lint') {
