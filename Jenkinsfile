@@ -8,18 +8,19 @@ pipeline {
     }
     stage('Test & Lint') {
       parallel {
-        steps {
-          sh "npm run lint"
+        stage('Unittests') {
+          steps {
+            sh "npm run test:unit"
+          }
         }
-        steps {
-          sh "npm run test:unit"
+        stage('Lint') {
+          steps {
+            sh "npm run lint"
+          }
         }
       }
     }
     stage('E2E Test') {
-      steps {
-        sh "npm run dev"
-      }
       steps {
         sh "npm run test"
       }
