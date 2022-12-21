@@ -1,3 +1,4 @@
+@Library("HomelabLib") _
 pipeline {
   agent { label 'jenkinsagent' }
   tools {
@@ -27,6 +28,11 @@ pipeline {
       steps {
         sh "npm run build"
       }
+    }
+  }
+  post{
+    failure {
+      notifySlackFailedJob()
     }
   }
 }
