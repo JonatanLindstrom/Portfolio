@@ -24,9 +24,9 @@ pipeline {
         }
       }
     }
-    stage('Build') {
+    stage('Build image') {
       steps {
-        sh "npm run build"
+        sh "docker build -t portfolio ."
       }
     }
   }
