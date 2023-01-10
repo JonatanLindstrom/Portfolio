@@ -3,6 +3,7 @@ pipeline {
   agent { label 'jenkinsagent' }
   tools {
     nodejs 'node-18.12.1'
+    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
   }
   stages {
     stage('Install dependencies') {
@@ -24,9 +25,11 @@ pipeline {
         }
       }
     }
-    stage('Build image') {
+    stage('Build') {
       steps {
-        sh "docker build -t portfolio ."
+        script {
+          docker.build("jonatanlindstrom/portfolio")
+        }
       }
     }
   }

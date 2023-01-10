@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Avatar } from '@skeletonlabs/skeleton';
+	// import { Avatar } from '@skeletonlabs/skeleton';
 
 	import Wip from '$lib/components/wip.svelte';
 </script>
