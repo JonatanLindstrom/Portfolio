@@ -1,34 +1,74 @@
 @Library("HomelabLib") _
 pipeline {
-  agent { label 'jenkinsagent' }
-  tools {
-    nodejs 'node-18.12.1'
-    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
-  }
+  agent none
   stages {
-    stage('Install dependencies') {
-      steps {
-        sh "npm install"
+    stage('Integration tests') {
+      agent { label 'jenkinsagent' }
+      tools {
+        nodejs 'node-18.12.1'
       }
-    }
-    stage('Test & Lint') {
-      parallel {
-        stage('Unittests') {
+      stages {
+        stage('Install pnpm') {
           steps {
-            sh "npm run test:unit"
+            sh "npm install -g pnpm"
           }
         }
-        stage('Lint') {
+        stage('Install dependencies') {
           steps {
-            sh "npm run lint"
+            sh "pnpm install"
+          }
+        }
+        stage('Test & Lint') {
+          parallel {
+            stage('Unittests') {
+              steps {
+                sh "pnpm run test:unit"
+              }
+            }
+            stage('Lint') {
+              steps {
+                sh "pnpm run lint"
+              }
+            }
           }
         }
       }
     }
-    stage('Build') {
+    stage('Dockerize') {
+      agent {
+        kubernetes {
+          yaml """
+    kind: Pod
+    spec:
+      containers:
+      - name: kaniko
+        image: gcr.io/kaniko-project/executor:debug
+        imagePullPolicy: Always
+        command:
+        - sleep
+        args:
+        - 9999999
+        volumeMounts:
+          - name: jenkins-docker-cfg
+            mountPath: /kaniko/.docker
+      volumes:
+      - name: jenkins-docker-cfg
+        projected:
+          sources:
+          - secret:
+              name: docker-credentials
+              items:
+                - key: .dockerconfigjson
+                  path: config.json
+    """
+        }
+      }
       steps {
-        script {
-          docker.build("jonatanlindstrom/portfolio")
+        container(name: 'kaniko', shell: '/busybox/sh') {
+          sh '''#!/busybox/sh
+            echo "FROM jenkins/inbound-agent:latest" > Dockerfile
+            /kaniko/executor --context `pwd` --destination jonatanlindstrom/portfolio:latest
+          '''
         }
       }
     }
