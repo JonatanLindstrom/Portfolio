@@ -1,9 +1,9 @@
 <script lang="ts">
-	import '@skeletonlabs/skeleton/styles/all.css';
-	import '@skeletonlabs/skeleton/themes/theme-crimson.css';
-	import '../app.postcss';
+	import '@skeletonlabs/skeleton/styles/all.css'
+	import '@skeletonlabs/skeleton/themes/theme-crimson.css'
+	import '../app.postcss'
 
-	import { AppBar, LightSwitch, GradientHeading } from '@skeletonlabs/skeleton';
+	import { AppBar, LightSwitch, GradientHeading } from '@skeletonlabs/skeleton'
 </script>
 
 <svelte:head>

@@ -10,6 +10,6 @@ const config = {
 	},
 
 	plugins: [require('@skeletonlabs/skeleton/tailwind/theme.cjs')],
-};
+}
 
-module.exports = config;
+module.exports = config

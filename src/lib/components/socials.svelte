@@ -9,16 +9,16 @@
 
 <slot>
 	<div class="flex gap-8 md:gap-4">
-		<a href={FACEBOOK_URL} target="_blank" value="noreferrer">
+		<a href={FACEBOOK_URL} target="_blank" rel="noreferrer">
 			<Facebook class="h-10 w-10 dark:fill-surface-50" />
 		</a>
-		<a href={INSTAGRAM_URL} target="_blank" value="noreferrer">
+		<a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
 			<Instagram class="h-10 w-10 dark:fill-surface-50" />
 		</a>
-		<a href={GITHUB_URL} target="_blank" value="noreferrer">
+		<a href={GITHUB_URL} target="_blank" rel="noreferrer">
 			<GitHub class="h-10 w-10 dark:fill-surface-50" />
 		</a>
-		<a href={LINKEDIN_URL} target="_blank" value="noreferrer">
+		<a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
 			<LinkedIn class="h-10 w-10 dark:fill-surface-50" />
 		</a>
 	</div>
