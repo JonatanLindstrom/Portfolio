@@ -72,8 +72,20 @@ pipeline {
         }
       }
     }
+    stage('Deploy') {
+      agent { label 'jenkinsagent'}
+      stages {
+        stage('Deploy to kubernetes') {
+          steps {
+            withKubeConfig([namespace: "portfolio"]) {
+              sh 'kubectl apply -f deploy/prod.yml'
+            }
+          }
+        }
+      }
+    }
   }
-  post{
+  post {
     failure {
       notifySlackFailedJob()
     }
