@@ -77,7 +77,7 @@ pipeline {
       stages {
         stage('Deploy to kubernetes') {
           steps {
-            withKubeConfig([namespace: "portfolio"]) {
+            withKubeConfig([credentialsId: "jenkins-k3s-admin-token", clusterName: 'homelab', contextName: 'homelab', namespace: "portfolio"]) {
               sh 'kubectl apply -f deploy/prod.yml'
             }
           }

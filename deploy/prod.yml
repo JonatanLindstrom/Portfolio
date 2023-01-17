@@ -16,4 +16,4 @@ spec:
       containers:
         - name: portfolio
           image: jonatanlindstrom/portfolio
-          imagePullPolicy: AlwaysPull
+          imagePullPolicy: Always
