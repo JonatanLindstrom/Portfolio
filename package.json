@@ -15,6 +15,7 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
+		"@poppanator/sveltekit-svg": "^2.0.2",
 		"@skeletonlabs/skeleton": "^0.80.9",
 		"@sveltejs/adapter-node": "^1.1.0",
 		"@sveltejs/kit": "^1.0.0",
@@ -31,6 +32,7 @@
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
+		"sass": "^1.57.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^2.9.2",
 		"svelte-preprocess": "^4.10.7",
